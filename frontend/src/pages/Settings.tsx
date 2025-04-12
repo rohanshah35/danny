@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +12,6 @@ const Settings = () => {
   const { toast } = useToast();
   const [notifications, setNotifications] = useState(true);
   const [marketingEmails, setMarketingEmails] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
 
   const handleSaveProfile = () => {
     toast({
@@ -31,14 +29,6 @@ const Settings = () => {
     });
   };
 
-  const handleSaveAppearance = () => {
-    toast({
-      title: "Appearance Settings Updated",
-      description: "Your appearance preferences have been saved.",
-      duration: 3000,
-    });
-  };
-
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <div className="flex flex-col space-y-6">
@@ -48,10 +38,9 @@ const Settings = () => {
         </div>
 
         <Tabs defaultValue="profile" className="w-full">
-          <TabsList className="grid grid-cols-3 w-full max-w-md mb-6">
+          <TabsList className="grid grid-cols-2 w-full max-w-md mb-6">
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="notifications">Notifications</TabsTrigger>
-            <TabsTrigger value="appearance">Appearance</TabsTrigger>
           </TabsList>
           
           <TabsContent value="profile">
@@ -85,7 +74,9 @@ const Settings = () => {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button onClick={handleSaveProfile} className="bg-orange-500 hover:bg-orange-600">Save Changes</Button>
+                <Button onClick={handleSaveProfile} className="bg-orange-500 hover:bg-orange-600">
+                  Save Changes
+                </Button>
               </CardFooter>
             </Card>
           </TabsContent>
@@ -101,7 +92,9 @@ const Settings = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <Label htmlFor="notifications" className="text-base">Project Updates</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Receive notifications about your project progress and updates.</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Receive notifications about your project progress and updates.
+                      </p>
                     </div>
                     <Switch 
                       id="notifications" 
@@ -113,7 +106,9 @@ const Settings = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <Label htmlFor="marketingEmails" className="text-base">Marketing Emails</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Receive emails about new features and offers.</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Receive emails about new features and offers.
+                      </p>
                     </div>
                     <Switch 
                       id="marketingEmails" 
@@ -124,34 +119,9 @@ const Settings = () => {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button onClick={handleSaveNotifications} className="bg-orange-500 hover:bg-orange-600">Save Preferences</Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="appearance">
-            <Card>
-              <CardHeader>
-                <CardTitle>Appearance Settings</CardTitle>
-                <CardDescription>Customize how the application looks for you.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label htmlFor="darkMode" className="text-base">Dark Mode</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Enable dark mode for the application.</p>
-                    </div>
-                    <Switch 
-                      id="darkMode" 
-                      checked={darkMode} 
-                      onCheckedChange={setDarkMode} 
-                    />
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button onClick={handleSaveAppearance} className="bg-orange-500 hover:bg-orange-600">Save Preferences</Button>
+                <Button onClick={handleSaveNotifications} className="bg-orange-500 hover:bg-orange-600">
+                  Save Preferences
+                </Button>
               </CardFooter>
             </Card>
           </TabsContent>
