@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -32,7 +31,7 @@ const DashboardCard = ({
         onClick={onClick}
       >
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg font-medium">{title}</CardTitle>
+          <CardTitle className="text-lg font-bold">{title}</CardTitle>
         </CardHeader>
         <CardContent>{children}</CardContent>
       </Card>
