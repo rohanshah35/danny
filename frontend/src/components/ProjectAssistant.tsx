@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { SendIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,57 +17,87 @@ const initialMessages: Message[] = [
     id: 1,
     sender: "system",
     message:
-      "Hi! I'm Danny, your smart sourcing agent. I can help you find the right materials, contractors, and suppliers for your home renovation project. How can I assist you today?",
+      "Hello! I'm Danny, your intelligent project assistant, here to help with any questions you have about your project or the process overall. How can I assist you today?",
     timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
   },
 ];
 
+const TypingIndicator = () => {
+  return (
+    <div className="flex flex-col max-w-[85%] items-start">
+      <div className="px-4 py-3 rounded-2xl bg-gray-300 text-gray-900 rounded-tl-none">
+        <p className="text-sm">
+          Danny is typing
+          <span className="inline-block ml-1 animate-bounce">.</span>
+          <span className="inline-block ml-1 animate-bounce delay-200">.</span>
+          <span className="inline-block ml-1 animate-bounce delay-400">.</span>
+        </p>
+      </div>
+      <div className="flex items-center mt-1 text-xs text-gray-500">
+        <span>Danny</span>
+        <span className="mx-1">•</span>
+        <span>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+      </div>
+    </div>
+  );
+};
+
 const ProjectAssistant = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom of the chat container
-  const scrollToBottom = () => {
+  useEffect(() => {
     if (scrollAreaRef.current) {
       scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
     }
-  };
+  }, [messages, isLoading]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!input.trim()) return;
 
-    const userMessage: Message = {
+    const newUserMessage: Message = {
       id: messages.length + 1,
       sender: "user",
       message: input,
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
+    setMessages((prev) => [...prev, newUserMessage]);
+    setIsLoading(true);
 
-    // Simulated system (Danny) response after short delay
-    setTimeout(() => {
+    const customerId = "11111111-1111-1111-1111-111111111111";
+
+    try {
+      const response = await axios.post("http://localhost:8000/llm/chat", {
+        customer_id: customerId,
+        query: input,
+      });
+
       const systemResponse: Message = {
         id: messages.length + 2,
         sender: "system",
-        message:
-          "I'm looking into that for you. Based on your project timeline and budget, I'd recommend exploring options for sustainable materials that can save you money in the long run.",
+        message: response.data.answer,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, systemResponse]);
-    }, 1000);
+    } catch {
+      const errorMessage: Message = {
+        id: messages.length + 2,
+        sender: "system",
+        message: "Sorry, I was unable to retrieve a response at this time.",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setInput("");
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="flex flex-col h-full">
-      {/* Fixed-height container for messages with a subtle border */}
       <div className="h-[260px] bg-gray-50 border border-gray-200 rounded-lg">
         <div className="h-full w-full pr-4 overflow-auto" ref={scrollAreaRef}>
           <div className="space-y-4 p-4">
@@ -81,10 +112,8 @@ const ProjectAssistant = () => {
                 <div
                   className={cn(
                     "px-4 py-3 rounded-2xl",
-                    // Orange bubble for user messages
                     msg.sender === "user"
                       ? "bg-orange-500 text-white rounded-tr-none"
-                      // Light gray bubble for system (Danny) messages
                       : "bg-gray-300 text-gray-900 rounded-tl-none"
                   )}
                 >
@@ -97,12 +126,11 @@ const ProjectAssistant = () => {
                 </div>
               </div>
             ))}
-            <div ref={messagesEndRef} />
+            {isLoading && <TypingIndicator />}
           </div>
         </div>
       </div>
 
-      {/* Input area at bottom */}
       <div className="mt-4">
         <div className="flex items-center gap-2 relative">
           <Input
