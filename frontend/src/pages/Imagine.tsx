@@ -10,7 +10,7 @@ const SAMPLE_DESIGNS = [
   {
     id: 1,
     title: "Modern Kitchen",
-    image: "https://images.unsplash.com/photo-1556911220-bda9f7f13859",
+    image: "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?q=80&w=2681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     tags: ["Kitchen", "Modern", "White"],
   },
   {
