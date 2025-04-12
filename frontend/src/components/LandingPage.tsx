@@ -9,7 +9,7 @@ interface LandingPageProps {
 }
 
 const LandingPage = ({ onSelectUserType }: LandingPageProps) => {
-  const [activeTab, setActiveTab] = useState("homeowner");
+  const [activeTab, setActiveTab] = useState("customer");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,16 +24,16 @@ const LandingPage = ({ onSelectUserType }: LandingPageProps) => {
       <div className="text-center mb-8">
         <h1 className="text-5xl font-bold text-orange-500 mb-2">Danny.ai</h1>
         <p className="text-xl text-gray-600 dark:text-gray-300">
-          Smart home renovation platform
+          Your smart building command center
         </p>
       </div>
       
       <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 p-6">
         <h2 className="text-2xl font-bold text-center mb-6">Sign in to your account</h2>
         
-        <Tabs defaultValue="homeowner" className="w-full mb-6" onValueChange={setActiveTab}>
+        <Tabs defaultValue="customer" className="w-full mb-6" onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="homeowner">Homeowner</TabsTrigger>
+            <TabsTrigger value="customer">Customer</TabsTrigger>
             <TabsTrigger value="contractor">Contractor</TabsTrigger>
           </TabsList>
         </Tabs>

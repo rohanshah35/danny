@@ -13,7 +13,7 @@ interface LoginModalProps {
 }
 
 const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
-  const [activeTab, setActiveTab] = useState("homeowner");
+  const [activeTab, setActiveTab] = useState("customer");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,17 +33,17 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
           <DialogTitle className="text-center text-2xl font-semibold">Sign in to your account</DialogTitle>
         </DialogHeader>
         
-        <Tabs defaultValue="homeowner" className="w-full" onValueChange={setActiveTab}>
+        <Tabs defaultValue="customer" className="w-full" onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="homeowner">Homeowner</TabsTrigger>
+            <TabsTrigger value="customer">Customer</TabsTrigger>
             <TabsTrigger value="contractor">Contractor</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="homeowner" className="space-y-4">
+          <TabsContent value="customer" className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="homeowner-email">Email</Label>
+              <Label htmlFor="customer-email">Email</Label>
               <Input 
-                id="homeowner-email" 
+                id="customer-email" 
                 placeholder="your.email@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -51,13 +51,13 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <Label htmlFor="homeowner-password">Password</Label>
+                <Label htmlFor="customer-password">Password</Label>
                 <a href="#" className="text-sm text-orange-500 hover:text-orange-600">
                   Forgot password?
                 </a>
               </div>
               <Input 
-                id="homeowner-password" 
+                id="customer-password" 
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

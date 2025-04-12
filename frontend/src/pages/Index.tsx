@@ -108,7 +108,7 @@ const Index = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
           <div>
             <h1 className="text-3xl font-bold">Dashboard</h1>
-            <p className="text-gray-500 dark:text-gray-400">Welcome back to your home renovation project</p>
+            <p className="text-gray-500 dark:text-gray-400">Welcome back to your project</p>
           </div>
           <div className="flex items-center gap-2 bg-orange-50 dark:bg-orange-900/10 rounded-lg px-3 py-2 border border-orange-100 dark:border-orange-900/20">
             <UserIcon className="h-4 w-4 text-orange-500" />
