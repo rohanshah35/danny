@@ -3,9 +3,15 @@ import WebSocket from "ws";
 import dotenv from "dotenv";
 import fastifyFormBody from "@fastify/formbody";
 import fastifyWs from "@fastify/websocket";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// Load environment variables from .env file
-dotenv.config();
+// Get the directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables from .env file in parent directory
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const { ELEVENLABS_AGENT_ID, ELEVENLABS_API_KEY } = process.env;
 
