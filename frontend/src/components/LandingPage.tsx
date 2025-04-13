@@ -46,7 +46,6 @@ const LandingPage = ({ onGetStarted }: LandingPageProps) => {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-orange-300 rounded-full opacity-60 animate-pulse [animation-delay:1500ms] dark:bg-orange-700/60"></div>
               
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 h-1/4 bg-orange-500 rounded-full shadow-lg animate-pulse [animation-delay:2250ms]"></div>
-]
               <div className="absolute top-1/4 right-1/4 p-3 bg-white rounded-lg shadow-lg animate-bounce [animation-delay:1000ms] dark:bg-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500">
                   <path d="M2 22v-5l5-5 5 5-5 5z"></path>
@@ -96,7 +95,7 @@ const LandingPage = ({ onGetStarted }: LandingPageProps) => {
       </main>
 
       <footer className="py-4 px-6 border-t border-gray-200 text-center text-gray-500 text-sm dark:border-gray-800 dark:text-gray-400">
-        &copy; {new Date().getFullYear()} Danny.ai. All rights reserved.
+        Danny.ai, Catapult Purdue 2025
       </footer>
     </div>
   );

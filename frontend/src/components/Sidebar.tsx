@@ -55,7 +55,7 @@ const Sidebar = ({ onLogout, userType }: SidebarProps) => {
   };
 
   const sidebarItems = [
-    { icon: HomeIcon, label: "Overview", path: "/" },
+    { icon: HomeIcon, label: "Overview", path: "/overview" },
     { icon: ImageIcon, label: "Imagine", path: "/imagine" },
     { icon: CalendarIcon, label: "Timeline", path: "/timeline" },
     { icon: WalletIcon, label: "Budget", path: "/budget" },
