@@ -109,7 +109,7 @@ const Sidebar = ({ onLogout, userType }: SidebarProps) => {
             </div>
             {!isCollapsed && (
               <div className="flex flex-col">
-                <span className="text-sm font-medium">{userType === "customer" ? "Customer" : "Contractor"}</span>
+                <span className="text-sm font-medium">{userType === "customer" ? "Customer" : "Customer"}</span>
                 <span className="text-xs text-gray-500">Account</span>
               </div>
             )}

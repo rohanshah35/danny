@@ -38,7 +38,7 @@ const products = [
     unit: "sq ft",
     rating: 4.6,
     image:
-      "https://images.unsplash.com/photo-1622398925373-3f91b1e275f5?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=120&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI0ODgzNzQ4&ixlib=rb-1.2.1&q=80&w=200",
+      "https://images.unsplash.com/photo-1607403219525-6c60fa4f20fa?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aGFyZHdvb2QlMjBmbG9vcmluZ3xlbnwwfHwwfHx8MA%3D%3D",
     supplier: "Flooring Experts",
     tags: ["flooring", "wood", "oak"],
   },
