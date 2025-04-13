@@ -9,7 +9,6 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import ProjectAssistant from "@/components/ProjectAssistant";
 
-// Sample data for our charts and cards
 const budgetData = [
   { name: "Jan", amount: 8000 },
   { name: "Feb", amount: 6000 },
@@ -72,7 +71,6 @@ const Index = () => {
   const completedStages = projectStages.filter(stage => stage.complete).length;
   const projectProgress = (completedStages / projectStages.length) * 100;
   
-  // Placeholder contractor information
   const contractorName = "Michael Johnson";
   const contractorCompany = "Johnson Renovations";
 
@@ -137,7 +135,7 @@ const Index = () => {
                 </div>
               </div>
               <Progress value={percentSpent} className="h-2 bg-gray-200 dark:bg-gray-700" />
-              <div className="h-32">
+              <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={budgetData}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />

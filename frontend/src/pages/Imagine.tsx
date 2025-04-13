@@ -33,7 +33,6 @@ const SAMPLE_DESIGNS = [
   },
 ];
 
-// Helper function to convert a base64 DataURL to a File object
 const base64toFile = (dataUrl, filename) => {
   const arr = dataUrl.split(",");
   const mimeMatch = arr[0].match(/:(.*?);/);
@@ -49,7 +48,6 @@ const base64toFile = (dataUrl, filename) => {
 };
 
 const Imagine = () => {
-  // State for managing tabs, file upload, text prompt, preview image, and loading state
   const [activeTab, setActiveTab] = useState("generate");
   const [isHovering, setIsHovering] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -57,10 +55,8 @@ const Imagine = () => {
   const [promptText, setPromptText] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // useRef for file input (hidden) to trigger click programmatically
   const fileInputRef = useRef(null);
 
-  // Trigger when file is selected
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     console.log("handleFileChange triggered");
@@ -70,7 +66,6 @@ const Imagine = () => {
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result;
-        // Set the preview to the uploaded image (base64 encoded)
         setPreviewURL(result);
         if (typeof result === "string") {
           console.log("File preview URL set (first few chars):", result.substring(0, 50));
@@ -84,10 +79,8 @@ const Imagine = () => {
     }
   };
 
-  // This function is called when the user clicks "Generate Designs"
   const handleGenerateDesigns = async () => {
     console.log("Generate Designs button pressed");
-    // Allow chaining: if no new file is selected, use the generated (preview) image
     if (!selectedFile && !previewURL) {
       console.error("Upload validation failed: No file or previous image available.");
       alert("Please upload an image or use the generated image from a previous result!");
@@ -103,7 +96,6 @@ const Imagine = () => {
     console.log("Loading state set to true");
 
     try {
-      // Determine which image to send: new file or the previously generated image converted to a File object.
       const fileToSend = selectedFile ? selectedFile : base64toFile(previewURL, "generated.png");
 
       const formData = new FormData();
@@ -128,11 +120,9 @@ const Imagine = () => {
       }
       const data = await response.json();
       console.log("API Success Response data:", data);
-      // Expecting a JSON response with a base64 image string under "base64_image"
       if (data.base64_image) {
         const generatedImageUrl = "data:image/png;base64," + data.base64_image;
         setPreviewURL(generatedImageUrl);
-        // Reset selected file so that chaining uses the newly generated image on subsequent calls
         setSelectedFile(null);
         console.log("Generated image preview URL set (first few chars):", generatedImageUrl.substring(0, 50));
       } else {
@@ -169,12 +159,10 @@ const Imagine = () => {
             </TabsTrigger>
           </TabsList>
 
-          {/* Tab for generating ideas */}
           <TabsContent value="generate" className="animate-fade-in">
             <Card>
               <CardContent className="pt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Left section: prompt input and generate button */}
                   <div>
                     <h3 className="text-lg font-medium mb-4">
                       Generate design ideas with AI
@@ -218,13 +206,12 @@ const Imagine = () => {
                       {loading ? "Generating..." : "Generate Designs"}
                     </Button>
                   </div>
-                  
-                  {/* Right section: file upload / image preview */}
+
                   <div
                     className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-8 h-[450px] dark:border-gray-700 cursor-pointer"
                     onClick={() => fileInputRef.current && fileInputRef.current.click()}
                   >
-                    {/* Show preview image if available */}
+
                     {previewURL ? (
                       <img 
                         src={previewURL}
@@ -243,7 +230,7 @@ const Imagine = () => {
                         </Button>
                       </>
                     )}
-                    {/* Hidden file input */}
+
                     <input 
                       type="file" 
                       accept="image/*" 
@@ -257,7 +244,6 @@ const Imagine = () => {
             </Card>
           </TabsContent>
 
-          {/* Tab for design gallery (unchanged sample designs) */}
           <TabsContent value="gallery" className="animate-fade-in">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {SAMPLE_DESIGNS.map((design) => (
