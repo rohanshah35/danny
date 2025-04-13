@@ -14,6 +14,7 @@ import {
   SettingsIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 interface SidebarItemProps {
   icon: React.ElementType;
@@ -30,6 +31,7 @@ interface SidebarProps {
 const SidebarItem = ({ icon: Icon, label, path, isCollapsed }: SidebarItemProps) => {
   const location = useLocation();
   const isActive = location.pathname === path;
+  const navigate = useNavigate();
 
   return (
     <Link
@@ -92,8 +94,7 @@ const Sidebar = ({ onLogout, userType }: SidebarProps) => {
           />
         ))}
       </div>
-      
-      {/* User profile and logout at bottom of sidebar */}
+
       <div className="mt-auto border-t border-gray-200 dark:border-gray-800 p-3">
         <div className={cn(
           "flex items-center gap-3 p-2 rounded-lg",
@@ -113,8 +114,7 @@ const Sidebar = ({ onLogout, userType }: SidebarProps) => {
               </div>
             )}
           </div>
-          
-          {/* Only show logout button when sidebar is expanded */}
+
           {!isCollapsed && (
             <button
               onClick={onLogout}

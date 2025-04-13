@@ -52,6 +52,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     setIsLoggedIn(false);
     setUserType(null);
     setShowLanding(true);
+    navigate("/");
    
     toast({
       title: "Logged out",
