@@ -23,7 +23,7 @@ const App = () => (
       <BrowserRouter>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/overview" element={<Index />} />
             <Route path="/imagine" element={<Imagine />} />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/budget" element={<Budget />} />

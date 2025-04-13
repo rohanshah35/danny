@@ -20,7 +20,6 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-// Sample product data
 const products = [
   {
     id: 1,
@@ -72,14 +71,25 @@ const Danny = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [waitTime, setWaitTime] = useState<number | null>(null);
 
-  // When the button is clicked, generate a random wait time (5 to 20 minutes)
-  const handleDeployClick = () => {
-    const randomTime = Math.floor(Math.random() * 16) + 5; // Generates a number between 5 and 20
+  const handleDeployClick = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/voiceagent/call", {
+        method: "POST",
+      });
+      if (!response.ok) {
+        throw new Error("API request failed");
+      }
+      const result = await response.json();
+      console.log("API response:", result);
+    } catch (error) {
+      console.error("Error calling API:", error);
+    }
+
+    const randomTime = Math.floor(Math.random() * 16) + 5;
     setWaitTime(randomTime);
     setShowPopup(true);
   };
 
-  // Function to close the popup
   const closePopup = () => {
     setShowPopup(false);
   };
@@ -95,7 +105,6 @@ const Danny = () => {
         </div>
 
         <Tabs defaultValue="search" className="w-full" onValueChange={setActiveTab}>
-          {/* Wrap TabsList and the Deploy Voice Agent button in a flex container */}
           <div className="flex justify-between items-center mb-6">
             <TabsList>
               <TabsTrigger value="search" className="flex items-center gap-2">
@@ -112,7 +121,6 @@ const Danny = () => {
               </TabsTrigger>
             </TabsList>
 
-            {/* Orange Deploy Voice Agent Button */}
             <Button
               className="bg-orange-500 hover:bg-orange-600 text-white"
               onClick={handleDeployClick}
@@ -121,7 +129,6 @@ const Danny = () => {
             </Button>
           </div>
 
-          {/* Search Tab */}
           <TabsContent value="search" className="animate-fade-in">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="md:col-span-3">
@@ -203,7 +210,6 @@ const Danny = () => {
             </div>
           </TabsContent>
 
-          {/* Selected Items Tab */}
           <TabsContent value="selected" className="animate-fade-in">
             <Card>
               <CardHeader>
@@ -214,7 +220,6 @@ const Danny = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {/* Example selected item card */}
                   <div className="flex items-center p-4 border border-gray-100 rounded-lg dark:border-gray-800">
                     <div className="w-16 h-16 overflow-hidden rounded">
                       <img
@@ -256,13 +261,11 @@ const Danny = () => {
                       </Button>
                     </div>
                   </div>
-                  {/* Additional selected item cards can be added here */}
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
-          {/* Saved Tab */}
           <TabsContent value="saved" className="animate-fade-in">
             <Card>
               <CardHeader>
@@ -273,7 +276,6 @@ const Danny = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {/* Example saved item card */}
                   <div className="flex items-center p-4 border border-gray-100 rounded-lg dark:border-gray-800">
                     <div className="w-16 h-16 overflow-hidden rounded">
                       <img
@@ -315,7 +317,6 @@ const Danny = () => {
                       </Button>
                     </div>
                   </div>
-                  {/* Additional saved item cards can be added here */}
                 </div>
               </CardContent>
             </Card>
@@ -323,7 +324,6 @@ const Danny = () => {
         </Tabs>
       </div>
 
-      {/* Popup Overlay */}
       {showPopup && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"

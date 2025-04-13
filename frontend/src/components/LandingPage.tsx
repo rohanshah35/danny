@@ -1,86 +1,103 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowRightIcon } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface LandingPageProps {
-  onSelectUserType: (userType: string) => void;
+  onGetStarted: () => void;
 }
 
-const LandingPage = ({ onSelectUserType }: LandingPageProps) => {
-  const [activeTab, setActiveTab] = useState("customer");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const LandingPage = ({ onGetStarted }: LandingPageProps) => {
+  const { toast } = useToast();
+  
+  const handleLogin = () => {
+    onGetStarted();
+    toast({
+      title: "Welcome to Danny.ai",
+      description: "Please sign in to continue.",
+      duration: 3000,
+    });
 
-  const handleSignIn = () => {
-    if (email && password) {
-      onSelectUserType(activeTab);
-    }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900 p-4">
-      <div className="text-center mb-8">
-        <h1 className="text-5xl font-bold text-orange-500 mb-2">Danny.ai</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300">
-          Your smart building command center
-        </p>
-      </div>
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
+      <header className="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="text-xl font-bold text-orange-500">Danny.ai</div>
+        <Button 
+          variant="ghost" 
+          onClick={handleLogin}
+          className="text-orange-500 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20"
+        >
+          Sign In
+        </Button>
+      </header>
       
-      <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Sign in to your account</h2>
-        
-        <Tabs defaultValue="customer" className="w-full mb-6" onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="customer">Customer</TabsTrigger>
-            <TabsTrigger value="contractor">Contractor</TabsTrigger>
-          </TabsList>
-        </Tabs>
-        
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Email
-            </label>
-            <Input 
-              id="email"
-              type="email" 
-              placeholder="your.email@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          
-          <div>
-            <div className="flex justify-between mb-1">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Password
-              </label>
-              <a href="#" className="text-sm text-orange-500 hover:text-orange-600">
-                Forgot password?
-              </a>
+      {/* Main content */}
+      <main className="flex-1 flex items-center justify-center px-6">
+        <div className="container max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="w-full md:w-1/2">
+            <div className="relative w-full aspect-square max-w-md mx-auto">
+
+              <div className="absolute inset-0 bg-orange-100 rounded-full opacity-20 animate-pulse dark:bg-orange-900/30"></div>
+              
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-orange-200 rounded-full opacity-40 animate-pulse [animation-delay:750ms] dark:bg-orange-800/40"></div>
+              
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-orange-300 rounded-full opacity-60 animate-pulse [animation-delay:1500ms] dark:bg-orange-700/60"></div>
+              
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 h-1/4 bg-orange-500 rounded-full shadow-lg animate-pulse [animation-delay:2250ms]"></div>
+]
+              <div className="absolute top-1/4 right-1/4 p-3 bg-white rounded-lg shadow-lg animate-bounce [animation-delay:1000ms] dark:bg-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500">
+                  <path d="M2 22v-5l5-5 5 5-5 5z"></path>
+                  <path d="M9.5 14.5 16 8"></path>
+                  <path d="M17 2V1h1"></path>
+                  <path d="M17 6V5h1"></path>
+                  <path d="M21 6h1v1"></path>
+                  <path d="M21 2h1v1"></path>
+                  <path d="M17 10V9h1"></path>
+                  <path d="M21 10h1v1"></path>
+                  <rect x="17" y="17" width="4" height="4"></rect>
+                </svg>
+              </div>
+              
+              <div className="absolute bottom-1/4 left-1/4 p-3 bg-white rounded-lg shadow-lg animate-bounce [animation-delay:2000ms] dark:bg-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500">
+                  <path d="M3 21h18"></path>
+                  <path d="M9 8h1"></path>
+                  <path d="M9 12h1"></path>
+                  <path d="M9 16h1"></path>
+                  <path d="M14 8h1"></path>
+                  <path d="M14 12h1"></path>
+                  <path d="M14 16h1"></path>
+                  <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
+                </svg>
+              </div>
             </div>
-            <Input 
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
           </div>
-          
-          <Button 
-            onClick={handleSignIn}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md"
-          >
-            Sign In
-          </Button>
-          
-          <p className="text-center text-gray-600 dark:text-gray-400 mt-4">
-            Don't have an account? <a href="#" className="text-orange-500 hover:text-orange-600">Sign up</a>
-          </p>
+
+          <div className="w-full md:w-1/2 text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">Danny.ai</h1>
+            <h2 className="text-xl md:text-2xl text-gray-700 font-medium mb-6 dark:text-gray-300">
+              Your AI construction project manager
+            </h2>
+            <p className="text-gray-600 mb-8 max-w-lg dark:text-gray-400">
+            Danny.ai simplifies complex construction projects with intelligent sourcing, comprehensive project timelines, and powerful budget management tools. Let our AI assistant guide you seamlessly from planning to completion, no matter the scale or scope of your project.
+            </p>
+            <Button 
+              onClick={handleLogin} 
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-2 rounded-md flex items-center gap-2"
+            >
+              Get Started
+              <ArrowRightIcon size={16} />
+            </Button>
+          </div>
         </div>
-      </div>
+      </main>
+
+      <footer className="py-4 px-6 border-t border-gray-200 text-center text-gray-500 text-sm dark:border-gray-800 dark:text-gray-400">
+        &copy; {new Date().getFullYear()} Danny.ai. All rights reserved.
+      </footer>
     </div>
   );
 };
