@@ -10,3 +10,4 @@ langchain-openai
 langchain-community
 Pillow
 google-genai
+python-multipart
